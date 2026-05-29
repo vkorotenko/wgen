@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "wgen": {
+      "commandName": "Project",
+      "commandLineArgs": "s 998883843"
+    }
+  }
+}
