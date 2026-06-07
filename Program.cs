@@ -4,6 +4,9 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace wgen
 {
+    /// <summary>
+    /// Основное тело программы
+    /// </summary>
     internal class Program
     {
         /// <summary>
@@ -16,26 +19,19 @@ namespace wgen
 
 
             var retcode = 0;
-            const string fileName = "parsed.json";
-            Container? container = null;
-            if (File.Exists(fileName))
-            {
-                using var stream = new StreamReader(fileName);
-                var opt = new JsonSerializerOptions
-                {
-                    TypeInfoResolver = new DefaultJsonTypeInfoResolver()
-                };
-                container = JsonSerializer.Deserialize<Container>(stream.BaseStream,opt);
-            }
+           
 
-            container ??= new Container();
+            var container = new Container();
+            container.Load();
             try
             {
                 switch (args[0])
                 {
                     case "g":
-                        Console.WriteLine("");
-                        Console.Write(container.GenerateJs());
+                        Console.WriteLine("// writed to \"wbnmid.js\" file");
+                        var str = container.GenerateJs();
+                        File.WriteAllText("wbnmid.js",str);
+                        Console.Write(str);
                         break;
                     case "s":
                         Console.WriteLine("");
@@ -45,25 +41,18 @@ namespace wgen
                         break;
                     case "m":
                         Console.WriteLine("");
-                        Console.Write(container.Make());
+                        Console.Write(container.Make(args[1]));
                         break;
                     default:
                         Console.WriteLine(ShowHelp());
                         break;
                 }
             }
-            catch
-            {
-               Console.WriteLine( ShowHelp());
+            catch(Exception ex) {
+            
+                Console.WriteLine(ex.Message);
             }
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
-            };
-            var json = JsonSerializer.Serialize(container, options);
-
-            File.WriteAllText("parsed.json",json);
+            
             return retcode;
         }
         /// <summary>
@@ -75,12 +64,13 @@ namespace wgen
             return @"wgen simple program to generate image path from nmId for https://www.wildberries.ru/ 
 wgen g - generate a javascript for create a full url to image based on nmId. Attention check nmId before generate by command wgen s 998883843
 wgen s nmId - check exist or no image. If not exist rum  wgen m to create new parsed.json file. This command send request to server https://www.wildberries.ru/ and create new parsed.json file contain ranges of basket 
-wgen m - scan https://www.wildberries.ru/ for new basket and write to parsed.json file
+wgen m nmId - scan https://www.wildberries.ru/ for new basket and write to parsed.json file
 
 WARNING: Don't delete parsed.json file! This file contain all parsed data. This cached values improve generation speed.
 Retcodes: 
  * 0 - normal
- * 1 - single check nmId not passed, need recalculate base wgen m
+ * 1 - single check nmId not passed, need recalculate base wgen m nmId
+ * 2 - out of range in scan. Over 90 error in some time.
 ";
         }
     }

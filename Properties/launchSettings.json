@@ -2,7 +2,7 @@
   "profiles": {
     "wgen": {
       "commandName": "Project",
-      "commandLineArgs": "s 998883843"
+      "commandLineArgs": "g"
     }
   }
 }

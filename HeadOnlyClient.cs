@@ -1,19 +1,26 @@
 ﻿using System.Net;
+using System.Threading;
 
 namespace wgen;
 /// <summary>
 /// Посылает запрос только заголовка. Не скачивает реальных данных
 /// </summary>
-internal class HeadOnlyClient : WebClient
+internal class HeadOnlyClient 
 {
+    
     /// <summary>
-    /// Переопределяем отправку заголовка
+    /// Делаем зпрос для проверки наличия файла
     /// </summary>
-    public bool HeadOnly { get; set; }
-    protected override WebRequest GetWebRequest(Uri address)
+    /// <param name="address"></param>
+    /// <returns></returns>
+    public static async Task<HttpResponseMessage>  GetWebRequest(Uri address)
     {
-        var req = base.GetWebRequest(address);
-        if (HeadOnly && req.Method == "GET") req.Method = "HEAD";
-        return req;
+        using var client = new HttpClient();
+        using var request = new HttpRequestMessage(HttpMethod.Head, address);
+        using var response = await client.SendAsync(request);
+        
+        return response;
     }
+
+    
 }

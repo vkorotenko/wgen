@@ -1,0 +1,55 @@
+/**********************
+* input - nmId товара
+* Делает картинки для артикулов
+***********************/
+function wb_img_url(input) {
+var nm = parseInt(input, 10)
+var vol = ~~(nm / 1e5)
+var part = ~~(nm / 1e3)
+var host = ''
+if      (vol <= 143) host = '01'
+else if (vol <= 287) host = '02'
+else if (vol <= 431) host = '03'
+else if (vol <= 719) host = '04'
+else if (vol <= 1007) host = '05'
+else if (vol <= 1061) host = '06'
+else if (vol <= 1115) host = '07'
+else if (vol <= 1169) host = '08'
+else if (vol <= 1313) host = '09'
+else if (vol <= 1601) host = '10'
+else if (vol <= 1655) host = '11'
+else if (vol <= 1919) host = '12'
+else if (vol <= 2045) host = '13'
+else if (vol <= 2189) host = '14'
+else if (vol <= 2405) host = '15'
+else if (vol <= 2621) host = '16'
+else if (vol <= 2837) host = '17'
+else if (vol <= 3053) host = '18'
+else if (vol <= 3269) host = '19'
+else if (vol <= 3484) host = '20'
+else if (vol <= 3701) host = '21'
+else if (vol <= 3917) host = '22'
+else if (vol <= 4133) host = '23'
+else if (vol <= 4349) host = '24'
+else if (vol <= 4565) host = '25'
+else if (vol <= 4877) host = '26'
+else if (vol <= 5143) host = '27'
+else if (vol <= 5500) host = '28'
+else if (vol <= 5813) host = '29'
+else if (vol <= 6125) host = '30'
+else if (vol <= 6435) host = '31'
+else if (vol <= 6749) host = '32'
+else if (vol <= 7061) host = '33'
+else if (vol <= 7373) host = '34'
+else if (vol <= 7685) host = '35'
+else if (vol <= 7997) host = '36'
+else if (vol <= 8309) host = '37'
+else if (vol <= 8740) host = '38'
+else if (vol <= 9173) host = '39'
+else if (vol <= 9603) host = '40'
+else if (vol <= 10373) host = '41'
+else if (vol <= 11141) host = '42'
+else if (vol <= 11336) host = '43'
+else host = '44'
+return `https://basket-${host}.wbbasket.ru/vol${vol}/part${part}/${nm}/images/tm/1.webp`
+}
