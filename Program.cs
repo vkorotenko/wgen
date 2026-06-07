@@ -37,7 +37,7 @@ namespace wgen
                         Console.WriteLine("");
                         var res = container.CheckSingle(args[1]);
                         Console.Write(res);
-                        if (res.Contains("run wgen")) retcode=1;
+                        if (res.Contains("run wgen m nmid")) retcode=1;
                         break;
                     case "m":
                         Console.WriteLine("");
@@ -48,9 +48,9 @@ namespace wgen
                         break;
                 }
             }
-            catch(Exception ex) {
-            
-                Console.WriteLine(ex.Message);
+            catch(Exception ex)
+            {
+                Console.WriteLine(ShowHelp());
             }
             
             return retcode;

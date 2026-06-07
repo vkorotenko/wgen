@@ -179,6 +179,7 @@ public class Container
         var nmId = long.Parse(num);
         var host = Nodes.Max(x => x.Num) + 1;
         var max = Nodes.Max(x => x.End);
+        Console.WriteLine("Already update. Use wgen g");
         if (nmId <= max) return 0;
 
         var counter = new ContinuousError();

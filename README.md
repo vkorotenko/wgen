@@ -57,5 +57,10 @@ This cached values improve generation speed.
   https://dev.wildberries.ru/en/forum/topics/2225/poluchenie-kartinki-tovara-po-nmid
   Мой запрос. Собственно в нем посоветовали действовать через API
 
+  ## Компиляция на других платформах кроме Windows
+
+  Производится штатно, на поддерживаемых платформах. 
+  Если вы захотите выложить релиз, то кидайте пул реквест с артефактами. 
+
 
  

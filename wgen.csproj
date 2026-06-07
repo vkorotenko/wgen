@@ -14,6 +14,16 @@
     <None Update="parsed.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="wbnmid.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+	<Target Name="RunPostPublishScript" AfterTargets="Publish">
+		<Message Importance="high" Text="--- Starting Post-Publish Actions ---" />
+		<Message Importance="high" Text="Publish Directory: $(PublishDir)" />
+		<!-- copy files -->
+		<!-- <Exec Command="xcopy /s /y &quot;$(ProjectDir)config\*&quot; &quot;$(PublishDir)\&quot;" /> -->
+		
+	</Target>
 
 </Project>
